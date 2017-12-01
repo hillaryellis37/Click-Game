@@ -1,13 +1,20 @@
 import React, { Component } from "react";
-import Character from "./components/Character";
+
+import Navbar from "./components/Navbar";
+import Header from "./components/Header";
 import CharContainer from "./components/CharContainer";
-// import Jumbotron from "./components/Jumbotron";
+import Character from "./components/Character";
+
 import characters from "./characters.json";
 
 
 
 
+
 const App = () => (
+		<div className="container-fluide">	
+			<Navbar />	
+			<Header />
 			<CharContainer>
 				{characters.map(character => (
 					<Character
@@ -16,7 +23,7 @@ const App = () => (
 					/>
 				))}
 			</CharContainer>
-
+		</div>
 );
-				
+
 export default App;
