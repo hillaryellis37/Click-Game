@@ -7,11 +7,14 @@ import Character from "./components/Character";
 
 import characters from "./characters.json";
 
+let alreadyClicked = [];
+
 class App extends Component {
 
 	state = {
 		score: 0,
-		topscore: 0
+		topscore: 0,
+		message: "Click an image to begin!"
 	};
 
 	handleIncrementTopscore = () => {
@@ -20,9 +23,18 @@ class App extends Component {
 		}
 	};
 
-	handleIncrementScore = () => {
-		this.setState({score: this.state.score + 1});
-		this.handleIncrementTopscore();
+	handleIncrementScore = id => {
+		
+		if (alreadyClicked.includes(id)) {
+			this.setState({score: 0});
+			this.setState({message: "You guessed incorrectly!"});
+			alreadyClicked = [];
+		} else {
+			this.setState({score: this.state.score + 1});	
+			this.setState({message: "You guessed correctly!"});	
+			this.handleIncrementTopscore();
+			alreadyClicked.push(id);
+		}
 	};
 
 	render () {
@@ -31,6 +43,7 @@ class App extends Component {
 					<Navbar
 						score={this.state.score}
 						topscore={this.state.topscore}
+						message={this.state.message}
 					/>	
 					<Header />
 					<CharContainer>

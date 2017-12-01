@@ -6,10 +6,11 @@ const Navbar = props => (
 	<nav className="navbar sticky-top navbar-light bg-light">
 	  <ul>
 	  	<li>Clicky Game</li>
-	  	<li>Click an image to begin!</li>
+	  	<li>{props.message}</li>
 	  	<li><Scores 
 	  			score={props.score}
-	  			topscore={props.topscore}	
+	  			topscore={props.topscore}
+
 	  		/>
 	  	</li>
 	  </ul>
