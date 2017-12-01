@@ -7,23 +7,46 @@ import Character from "./components/Character";
 
 import characters from "./characters.json";
 
+class App extends Component {
 
+	state = {
+		score: 0,
+		topscore: 0
+	};
 
+	handleIncrementTopscore = () => {
+		if (this.state.score >= this.state.topscore) {
+			this.setState({topscore: this.state.topscore + 1});
+		}
+	};
 
+	handleIncrementScore = () => {
+		this.setState({score: this.state.score + 1});
+		this.handleIncrementTopscore();
+	};
 
-const App = () => (
-		<div className="container-fluide">	
-			<Navbar />	
-			<Header />
-			<CharContainer>
-				{characters.map(character => (
-					<Character
-						image={character.image}
-						name={character.name}
-					/>
-				))}
-			</CharContainer>
-		</div>
-);
+	render () {
+		return (
+				<div>	
+					<Navbar
+						score={this.state.score}
+						topscore={this.state.topscore}
+					/>	
+					<Header />
+					<CharContainer>
+						{characters.map(character => (
+							<Character								
+								handleIncrementScore={this.handleIncrementScore}
+								handleIncrementTopscore={this.handleIncrementTopscore}
+								id={character.id}
+								image={character.image}
+								name={character.name}
+							/>
+						))}
+					</CharContainer>
+				</div>
+		);
+	}
+}
 
 export default App;
