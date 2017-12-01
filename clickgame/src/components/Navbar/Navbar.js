@@ -1,4 +1,5 @@
 import React from "react";
+import Scores from "../Scores";
 import "./Navbar.css";
 
 const Navbar = () => (
@@ -6,7 +7,7 @@ const Navbar = () => (
 	  <ul>
 	  	<li>Clicky Game</li>
 	  	<li>Click an image to begin!</li>
-	  	<li>Score: 0 | Top Score: 0</li>
+	  	<li><Scores /></li>
 	  </ul>
 	</nav>
 );
