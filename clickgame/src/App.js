@@ -9,12 +9,32 @@ import characters from "./characters.json";
 
 let alreadyClicked = [];
 
+let characterIdArray = characters;
+
+
 class App extends Component {
 
 	state = {
 		score: 0,
 		topscore: 0,
-		message: "Click an image to begin!"
+		message: "Click an image to begin!",
+		characterOrder: characters 
+	};
+
+	shuffleCharacters = () => {
+		characterIdArray = [];
+		let numArray = [];
+		console.log(characterIdArray);
+
+		for (var i = 0; numArray.length < 12; i++) {
+			let num = Math.floor(Math.random() * (12 - 1 + 1));
+			if (!numArray.includes(num)) {
+				numArray.push(num);
+				characterIdArray.push(characters[num]);
+			} 
+
+		}
+		console.log(characterIdArray);
 	};
 
 	handleIncrementTopscore = () => {
@@ -24,6 +44,8 @@ class App extends Component {
 	};
 
 	handleIncrementScore = id => {
+
+		this.shuffleCharacters();
 		
 		if (alreadyClicked.includes(id)) {
 			this.setState({score: 0});
@@ -47,7 +69,7 @@ class App extends Component {
 					/>	
 					<Header />
 					<CharContainer>
-						{characters.map(character => (
+						{characterIdArray.map(character => (
 							<Character								
 								handleIncrementScore={this.handleIncrementScore}
 								handleIncrementTopscore={this.handleIncrementTopscore}
